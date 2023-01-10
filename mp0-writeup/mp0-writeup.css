@@ -1,0 +1,39 @@
+.picture {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid black;
+}
+
+body {
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+}
+
+.page-container {
+  width: 80%;
+  margin-top: 5rem;
+  margin: auto;
+}
+
+nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+nav a {
+  flex: 1;
+  background-color: #F88379;
+  color: white;
+  border: 2px solid;
+  padding: 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.5s ease-out;
+}
+
+nav a:hover,
+nav a:focus {
+  background-color: white;
+  color: #F88379;
+}
