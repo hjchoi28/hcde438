@@ -1,14 +1,13 @@
 .picture {
   width: 300px;
-  border: 1px solid black;
-  border-radius: 10px;
   cursor: pointer;
   object-fit: cover;
   aspect-ratio: 1;
 }
 
 .picture:hover {
-  filter: brightness(80%);
+  filter: brightness(110%);
+  border-radius: 50%;
 }
 
 .picture-container {
@@ -19,14 +18,46 @@
   gap: 12px;
 }
 
+.picture-text {
+  color: black;
+  text-align: center;
+}
+
 body {
-  background-color: black;
+  background-color: white;
   font-family: Arial, Helvetica, sans-serif;
-  color: white;
+  color: black;
 }
 
 .page-container {
   width: 80%;
   margin-top: 5rem;
   margin: auto;
+}
+
+.header {
+  text-align: center;
+  font-size: 2.5em;
+}
+
+nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+nav a {
+  flex: 1;
+  background-color: #F88379;
+  color: white;
+  border: 2px solid;
+  padding: 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.5s ease-out;
+}
+
+nav a:hover,
+nav a:focus {
+  background-color: white;
+  color: #F88379;
 }
