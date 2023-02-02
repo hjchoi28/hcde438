@@ -13,7 +13,7 @@
         <h1>MP1 Writeup</h1>
         <h2>Overview & Usage</h2>
           <p>For MP1, I created a chrome browser extension: "Tabby Cats". This extension lets users choose and play with different cat cursors in a popup.
-            The code for this extension can be found in this public github repository: <a href="https://github.com/hjchoi28/tabby-cats">github.com/hjchoi28/tabby-cats</a>.
+            The code for this extension can be found in my public github repository: <a href="https://github.com/hjchoi28/tabby-cats">github.com/hjchoi28/tabby-cats</a>.
             You can try out this browser by cloning the repository then selecting the "load unpacked" button in <a href="chrome://extensions/">chrome extensions</a>.
             Make sure you toggle on developer mode for the button to show up.
           </p>
@@ -82,7 +82,7 @@
             I confirmed the "click" option worked by making a function that creates alerts when the popup body element is clicked.
             I also confirmed the element specified for the event listener was correct by altering the function to change the background color of that element.
             I asked for help from Raina and after trying different methods, like changing the html tag from class="options" to button, she noticed the error.
-            When I called the function in the addEventListener, I included parenthesis, which cause it run the functions the momen the popup was opened.
+            When I called the function in the addEventListener, I included parenthesis, which caused it to run the functions the moment the popup was opened.
             We fixed it by removing the extra parenthesis: <em>.addEventListener("click", function)</em> instead of <em>.addEventListener("click", function())</em>.
           </p>
         <h2>Ideas and Future Work</h2>
