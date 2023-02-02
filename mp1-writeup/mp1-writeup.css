@@ -1,8 +1,18 @@
-.gif,
-.picture {
+.gif {
   max-width: 100%;
   height: auto;
   border: 2px solid black;
+}
+
+.picture {
+  max-width: 30%;
+  height: auto;
+  border: 2px solid black;
+  justify-content: space-evenly;
+}
+
+.pics-container {
+  display: flex;
 }
 
 body {
