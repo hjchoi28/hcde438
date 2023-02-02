@@ -1,1 +1,1 @@
-alert("Welcome to my portfolio page!");
+console.log("Welcome to my portfolio page!");
