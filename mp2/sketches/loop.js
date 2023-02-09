@@ -10,20 +10,20 @@ function setup() {
 }
 
 function draw() {
-  background(253, 253, 150);
+  background(200, 158, 211);
   r = random(250);
   g = random(0);
-  b = random(500);
+  b = random(255);
   c = color(r, g, b);
 
   noFill();
   stroke(c);
   strokeWeight(20);
 
-  if (x > windowWidth - 100 || x < 100) {
+  if (x > windowWidth - 60 || x < 60) {
     xd = xd * -1;
   }
-  if (y > windowHeight - 100 || y < 100) {
+  if (y > windowHeight - 60 || y < 60) {
     yd = yd * -1;
   }
   x = x + (5*xd);
