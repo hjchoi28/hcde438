@@ -20,16 +20,16 @@ function draw() {
   stroke(c);
   strokeWeight(20);
 
-  if (x > windowWidth - 60 || x < 60) {
+  if (x > windowWidth - 100 || x < 100) {
     xd = xd * -1;
   }
-  if (y > windowHeight - 60 || y < 60) {
+  if (y > windowHeight - 100 || y < 100) {
     yd = yd * -1;
   }
   x = x + (5*xd);
   y = y - (2*yd);
 
-  circle(x, y, 60);
+  circle(x, y, 100);
 }
 
 function windowResized() {
