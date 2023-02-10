@@ -31,3 +31,8 @@ nav a:focus {
   background-color: white;
   color: #F88379;
 }
+
+.header {
+  text-align: center;
+  font-size: 2.5em;
+}
