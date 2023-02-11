@@ -13,6 +13,21 @@
     <div class="page-container">
       <div>
         <h1>Cheatsheet</h1>
+        <h2>HTML</h2>
+        <ul>
+          <li><b>Encoded Characters</b></li>
+          <ul>
+            <li>a tab is &lt;& ensp;&gt; without the space</li>
+            <li>a line break is &lt;br&gt;</li>
+            <li>"&lt;" is &lt;& lt;&gt; without the space</li>
+            <li>"&lt;" is &lt;& ensp;&gt; without the space</li>
+            <li>"&gt;" is &lt;& gt;&gt; without the space</li>
+          </ul>
+          <li><b>DOCTYPE!</b></li>
+            <p>Always declare "&lt;!DOCTYPE html>" at the top of a html file.<br>
+              It is standard practice and it removed my issue with collapsing top margin for the header.</p>
+        </ul>
+
         <h2>CSS</h2>
         <ul>
           <li><b>Menu Highlight CSS Transition</b></li>
@@ -52,6 +67,7 @@
               <li>Align items or content for vertical layout</li>
             </ul>
         </ul>
+
         <h2>Javascript</h2>
         <ul>
           <li><b>addEventListener</b></li>
@@ -70,6 +86,28 @@
               <li>const varname = value that stays constant</li>
             </ul>
         </ul>
+
+        <h2>p5.js</h2>
+        <ul>
+          <li><b>Resource Links</b></li>
+            <ul>
+              <li><a href="https://editor.p5js.org/">p5 Editor</a></li>
+              <li><a href="https://p5js.org/reference/">Reference</a></li>
+              <li><a href="https://p5js.org/reference/#/libraries/p5.sound">Sound Library</a></li>
+              <li><a href="https://p5play.org/">Play Library</a></li>
+            </ul>
+            <p>Make sure to read the reference for each library carefully. Check if there are special instructions for using it.</p>
+          <li><b>Set Up Hosted Version</b></li>
+          <ul>
+            <li>Put the following code at the top of your html in your &lt;head>:</li>
+            <p>
+              &ensp;&lt; script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js" >&lt;/script ><br>
+              &ensp;&lt; script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js">&lt;/script><br>
+              &ensp;&lt;link rel="stylesheet" type="text/css" href="sketches.css"><br>
+              &ensp;&lt;meta charset="utf-8" /><br>
+            </p>
+            <li>Put the following code at the bottom of your &lt;body>: &lt;script src="filename.js">&lt;/script></li>
+          </ul>
       </div>
     </div>
   </body>
