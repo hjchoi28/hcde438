@@ -19,91 +19,94 @@
             The second sketch includes elements of randomness by changing the size and color of the circles every time the page is refreshed.
             The third sketch is a infinitely bouncing ball. For fun, I also made the color of the ball change to different colors.
             The fourth sketch allows people to interact with the art by moving the mouse, which creates circles of different sizes depending on the speed of the mouse.
-            The fifth sketch uses the <a href="https://p5js.org/reference/#/libraries/p5.sound">p5.sound</a> library to play and stop a song whenever the mouse is clicked.
-            Finally, the sixth sketch is .
+            The fifth sketch uses the <a href="https://p5js.org/reference/#/libraries/p5.sound">p5.sound</a> library to play and stop the "Happy Birthday" song whenever the mouse is clicked.
+            Finally, the sixth sketch is a combinational of audio and visual elements. As the user moves their mouse to the right, the frequency of the sound increases.
+            As the mouse moves to the bottom of the screen, the amplitude of the sound increases. Users can click to start and stop the sound.
+            Meanwhile, an ellipse follows the mouse and changes shape depending on the intensity of the frequency and amplitude.
           </p>
           <img
               class="gif"
-              src="mp2-gallery.png"
+              src="mp2-gallery.gif"
               alt="gallery of p5.js sketches"
             />
         <h2>Development Process</h2>
           <p>
-            First, I looked at the extension examples provided and familiarized myself with some of the common elements and commands.
-            Then, I sketched an idea of what the html and css would look like. I also thought about what javascript methods I could use to achieve my goals.
-            I had lots of fun looking for the cursor images on flaticon. I originally planned to have different animals like dogs, cats, and birds,
-            but I fell in love with the cute kitten icons that I ultimately used for this extension.
+            I started this gallery by first working on each of the sketches individually and in order of difficulty.
+            It took a while to get used to the p5.js editor, but the reference library really helped throughout the process.
+            Once I was done with each of the sketches, I tested to make sure they worked locally on my computer and hosted through github pages.
+            Then, I would move on to the next sketch.
+          </p>
           <p>
-            After the planning, I worked on the html and css of the popup. I like to complete the majority of the html and css file first,
-            before working on anything else. The following is the popup without the javascript which would change the cursor image:
+            <b>Sketch 1:</b> First, I focused on creating one shape, a circle, in the p5.js editor. Then, I watched <a href="https://thecodingtrain.com/tracks/code-programming-with-p5-js">Coding Train tutorials</a>.
+            It helped me figure out how to make multiple circles using "while" loop iterations. Finally, I changed the color and other visual elements.
+            This sketch creates a series circles centered vertically on the window. The circles to the right get consecutively larger and thicker in strokes.
+          </p>
+          <p>
+            <b>Sketch 2:</b> For this sketch, I built on the previous static art from sketch 1. I especially had fun trying different RGB codes.
+            With the "random()" function, I could specify a maximum number to narrow the resulting color possibilities. This sketch is similar to sketch 1 except the number of circles,
+            size, and color randomly change when the page is refreshed.
+          <p>
+            <b>Sketch 3:</b> By this point, I wanted to continue the theme of using circles. But instead of only changing when the page is refreshed,
+            the circle in this sketch continually changes color. I set a maximum limit to the random RGB codes so the circle color is changes between different types of purples, blues, and reds.
+            Unlike the previous two, sketch 3 is an infinite loop, where one circle moves around and "bounces" off the window edges.
+            I had trouble with the positioning and making the circle bounce at the correct points. More details on how I solved this issue are in the <i>Issue Deep-Dive</i> below.
+          </p>
+          <p>
+            <b>Sketch 4:</b> I had the most fun with this sketch because it was so interactive and colorful. As the mouse moves, random-colored circles appear.
+            The size and stroke weight of the circle change depending on the speed of the mouse.
+            From tutorials, I learned a way to calculate the speed of the mouse by subtracting the previous position of the mouse from the current position.
+            Then, I used the speed value to make the changes I wanted.
+          </p>
+          <p>
+            <b>Sketch 5:</b>  Within the p5.sound library, I specifically used the p5.SoundFile functions. I didn't use the circle theme i this sketch because I wanted to focus more on understanding the p5.sound library.
+            So, I found a free sound clip and worked on making sure the sound will play on my browser.
+            Unlike the other sketches, I didn't do this one completely on p5.js editor first. Instead, I wrote it on VSCode and had the page open with the live server extension.
+            This made it easier to confirm the sound worked and make sure the color changed when appropriate since my chrome browser required some kind of click interaction to play the sound.
+          </p>
+          <p>
+            <b>Sketch 6:</b> For the last sketch, I used the p5.Oscillator functions. I wanted to finish the gallery by going back to the circle theme. But first, I focused on making sure the sound actually plays with the movement of the mouse.
+            After I figured that out, I used the same principle to change the shape of the ellipse depending on where it is in the x and y position of canvas.
+            Similar to sketch 5, I also made sure there was a mouse press action to start the sound since many browsers do not auto play audio.
+          </p>
+          <p>Finally, I made sure the sketches cover the full window and change when the window is resized. As for the gallery itself, a lot fo the html and css was similar to this portfolio's homepage,
+            so taking screenshots and making gifs took more time than the code itself.</p>
+        <h2>Issue Deep-Dive</h2>
+          <img
+            class="gif"
+            src="loop-error.gif"
+            alt="rapidly, color-changing circle that bounces around the screen without actually colliding with the edges of the window."
+            />
+          <p>
+            The first issue I encountered was with sketch 3: infinite loop. I had trouble with the position of the circle and making sure that the direction of circle changes when th eedges touch the edges of the window.
+            I realized that the circle doesn't go close enough to the edges of the screen because my math was wrong. I had only accounted for the radius of the circle, but I hsould have also included the stroke size in my calculations.
+            The code tracks the location of the circle's center. So, I had to add the value of the radius (half the diameter) and half the specified stroke weight (since the thickness is centered) to the conditions for changing direction, which solved my issue.
           </p>
           <img
               class="gif"
-              src="tc-popup-draft.gif"
-              alt="popup without the javascript"
+              src="visual-error.gif"
+              alt="orange square getting covered by round strokes of blue."
             />
           <p>
-            As I was coding, I also made sure to give unique ids to the different cursor cat options to make it easier for myself later on.
-            I focused on writing the content in the html file and making sure the path to the images were correct.
-            Then, I played with CSS image resizing, margins, font, background color, etc...
-          </p>
-          <div class="pics-container">
-            <p>Before justifying content with flex:<br>
-              <img
-                class="picture"
-                src="tc-html-draft.png"
-                alt="html before changing flex display"
-              />
-            </p>
-            <p>After fixing the flex box display:<br>
-              <img
-                class="picture"
-                src="tc-html-final.png"
-                alt="html after changing flex display"
-              />
-            </p>
-          </div>
-          <p>
-            Finally, I wrote the javascript file to listen for the click event and change the cursor image in the popup.
-            I initially struggled with making the event listener call the function at the correct time.
-            However, Raina helped me figure it out (more details in the Issue Deep Dive below).
-          </p>
-        <h2>Issue Deep-Dive</h2>
-          <p>
-            The issues I encountered were with the cursor image and event listener.
-            For the cursor, the image would not load properly. First, I wanted to know if the image was the problem
-            or if the line of code had an issue. To do so, I set the fallback cursor keyword to "help".
-            So when the cursor changed to the "help", I knew that it was because the specified image failed to load.
-            Then, I made sure to properly declare the path to the image (cursors/cursor-name.png).
-            After further reseach, I realized the issue was with the size of the image. It is recommended to use icons that are at most 32x32 px.
-            Once I changed the size, the image was able to load properly.
-          </p>
-          <p>
-            The second issue was with the event listener in my javascript file.
-            I specified the element by id and added an event listener so that the cursor will change when the different buttons are clicked.
-            I only changed the cursor for the cursor-playroom container in the popup.
-            However, there was a bug where all of the functions were called before I even clicked on any of the options.
-            To debug, I added alerts and tried to change the order. I made sure that the images were loading properly.
-            I confirmed the "click" option worked by making a function that creates alerts when the popup body element is clicked.
-            I also confirmed the element specified for the event listener was correct by altering the function to change the background color of that element.
-            I asked for help from Raina and after trying different methods, like changing the html tag from class="options" to button, she noticed the error.
-            When I called the function in the addEventListener, I included parenthesis, which caused it to run the functions the moment the popup was opened.
-            We fixed it by removing the extra parenthesis: <em>.addEventListener("click", function)</em> instead of <em>.addEventListener("click", function())</em>.
+            The second issue was with sketch 6: audio and visual. I wanted to have the ellipse appear to follow the mouse but each drawing of the ellipse stayed, which ultimately allowed me to cover the entire background after waving my mouse around.
+            I walked through the code line by line and realized the issue was with where I set the background color. I only specified the background color in the setup() function, which is more of a one-time call versus the draw() function.
+            So, I set the background in the beginning the the draw() function, which covers the previous circles, making it seem like the circle is following the mouse around.
           </p>
         <h2>Ideas and Future Work</h2>
           <ul>
-            <li>Add more options for the cursor cat</li>
-            <li>Add more options for the playroom background</li>
-            <li>Consider making the playroom a separate new tab</li>
-            <li>Consider changing the cursor for the entire content script, not just the popup</li>
+            <li>Edit sketch 3 to make the color change slower and more natural</li>
+            <li>Add more visual effects to sketch 5</li>
+            <li>Find how to make more higher quality gifs of the sketches</li>
+            <li>Change the gallery background</li>
           </ul>
         <h2>Kudos</h2>
           <ul>
-            <li>Cursor image source: <a href="https://www.flaticon.com/packs/kitty-avatars">flaticon</a></li>
-            <li>Flex box: <a href="https://css-tricks.com/almanac/properties/j/justify-content/">css-tricks.com</a></li>
-            <li>Image sizing: <a href="https://www.w3schools.com/css/css3_object-fit.asp">w3schools.com</a></li>
-            <li>Cursor CSS: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/cursor">developer.mozilla.org</a></li>
-            <li>Last but not least... <em>Raina!</em> Thank you for helping me debug the event listener!</li>
+            <li><a href="https://thecodingtrain.com/tracks/code-programming-with-p5-js">Coding Train</a></li>
+            <li><a href="https://p5js.org/reference/">p5.js Reference Library</a></li>
+            <li><a href="https://creative-coding.decontextualize.com/synthesizing-analyzing-sound/">p5.sound Examples</a></li>
+            <li><b>Audio credits for sketch 5: </b>Happy Birthday Music Box by <a href="https://freesound.org/people/Percy%20Duke/">Percy Duke</a>
+              | Music promoted by <a href="https://www.chosic.com/free-music/all/">chosic.com</a>
+              | <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons CC BY 3.0</a>
+            </li>
           </ul>
       </div>
     </div>
