@@ -84,7 +84,7 @@
             The second issue was with creating the asteroid sprites. Because I created the sprites in the <code>draw()</code> function,
             the asteroids were continually made until it covered and blocked the whole window. I changed it to create the sprites in the <code>setup()</code> functions.
             This made it so I could control the exact number of asteroids that would appear in the game. However, this meant I couldn't remove the asteroids once they left the window
-            or else the asteroids will eventually all be removed, making it impossible ot trigger the end condition of the game.
+            or else the asteroids will eventually all be removed, making it impossible to trigger the end condition of the game.
             So instead, I learned how to change the position of the asteroids so that once they moved past a certain number of pixels from the window edges,
             they would reappear on the other end of the window. Creating the asteroids in the <code>setup()</code> function also made it easier to reset the game without refreshing the window.
           </p>
