@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../mp2/mp2.css" />
+  </head>
+  <body>
+    <h1 class="header">Hwa Jung Choi</h1>
+    <nav>
+      <a href="..">Home</a>
+      <a href="../bio/bio.html">About</a>
+      <a href="../cheatsheet/cheatsheet.html">"Cheatsheet"</a>
+    </nav>
+    <div class="page-container">
+      <div>
+        <h1>MP3 Writeup</h1>
+        <h2>Overview & Usage</h2>
+          <p>For MP3, I created a 2D game using the <a href="https://p5js.org/">p5.js</a> and <a href="https://p5play.org/">p5.play</a> libraries,
+            where the goal is to help the space ktty avoid colliding with asteroids in space.
+            The player can control the movement of the space kitty with their mouse and the game continues infinitely until the player hits the asteroids.
+            However, the speed of the asteroids also increases as the game progresses, making it more difficult.
+            Once the end condition is met, the timer and game resets, and the player is encouraged to try again.
+            <ul>
+              <li>Play the game at <a href="https://hjchoi28.github.io/space-kitty/">hjchoi28.github.io/space-kitty/</a></li>
+              <li>Check out the code in my <a href="https://github.com/hjchoi28/space-kitty">Public Github Repository</a>
+            </ul>
+            The purpose of MP3 was to learn how to use NPM to install libraries, a local development server, and bundle code.
+            I also learned how to deploy my project on Github Pages.
+          </p>
+          <img
+              class="gif"
+              src="space-kitty.gif"
+              alt="Gameplay of Space Kitty"
+            />
+        <h2>Development Process</h2>
+          <p>
+            I started this project by setting up my development toolchain using Hannah's example <a href="https://github.com/branchwelder/web-technologies/blob/main/activities/06_toolchain.md">Dev Toolchain Walkthrough</a>.
+            I used the sample <a href="https://editor.p5js.org/quinton-ashley/sketches/szN_XdV5O">p5.play starter code</a> to try deploying my game.
+            Once I confirmed everything worked, I started writing my actual game code.
+          </p>
+          <p>
+            First, I looked at Allison Parrish's <a href="https://creative-coding.decontextualize.com/making-games-with-p5-play/">p5.play tutorial</a>
+            to understand the basics of the p5.play library. Then, I divided the core function of my game into manageable steps I could implement.
+            I explored creating sprites by creating a static group of grey square sprites to represent the asteroids,
+            and adding the image of the space kitty to a sprite that follows the mouse position.
+          </p>
+          <img
+            class="picture"
+            src="setup-kitty.png"
+            alt="White background with the text: 'avoid the asteroids' in the center, three grey squares to the left, and a kitty icon wearing a space helmet to the right"
+            />
+          <p>
+            After figuring out how the sprites worked, I then worked on making the asteroids dynamic.
+            I struggled with creating a reasonable number of the sprites since the <code>draw()</code> function would continuously create them until it covered the whole screen.
+            I eventually figured it out using the p5.play demos. Read more details in the "Issue Deep-Dive" section below.
+          </p>
+          <p>
+            Then, I added the end condition. When the kitty sprite overlaps with any of the asteroids in the sprite group,
+            the game ends and resets. With this, I finished the core functions of the game and had time to add more features.
+            One of the additions was a timer, which I implemented using the <code>setInterval()</code> function.
+            I also made the speed of the asteroids gradually increase to make the gameplay more interesting and challenging.
+            For visual effects, I made the asteroids rotate and loaded an image of an asteroid icon to the sprites.
+            Lastly, I made sure players can replay the game without having the refresh the entire page.
+          </p>
+        <h2>Issue Deep-Dive</h2>
+          <img
+            class="picture"
+            src="trailing-error.png"
+            alt="trail of kitty icons with space helmets"
+            />
+          <p>
+            The first issue I encountered was with the kitty avatar leaving a trail whenever the mouse moved.
+            The code worked when I was using the p5,js editor but not when I wrote the same code on VSCode.
+            I realized the reason was because I was adding to the starter code, which had the <code>background()</code> in the <code>draw()</code> function already.
+            Meanwhile, I was accustomed to setting the background color in the <code>setup()</code> function.
+            By having the background color set everytime the <code>draw()</code> function is looped,
+            it covers the kitty image from the previous position and only shows the image where the mouse is currently positioned.
+          </p>
+          <img
+              class="picture"
+              src="asteroid-error.png"
+              alt="dark blue background with multiple grey circles surrounding a kitty icon"
+            />
+          <p>
+            The second issue was with creating the asteroid sprites. Because I created the sprites in the <code>draw()</code> function,
+            the asteroids were continually made until it covered and blocked the whole window. I changed it to create the sprites in the <code>setup()</code> functions.
+            This made it so I could control the exact number of asteroids that would appear in the game. However, this meant I couldn't remove the asteroids once they left the window
+            or else the asteroids will eventually all be removed, making it impossible ot trigger the end condition of the game.
+            So instead, I learned how to change the position of the asteroids so that once they moved past a certain number of pixels from the window edges,
+            they would reappear on the other end of the window. Creating the asteroids in the <code>setup()</code> function also made it easier to reset the game without refreshing the window.
+          </p>
+        <h2>Ideas and Future Work</h2>
+          <ul>
+            <li>Adjust the size of the kitty and asteroid depending on the window size</li>
+            <li>Make it playable on mobile devices</li>
+            <li>Include start and end screens; give player option to continue playing</li>
+            <li>Add a shooting mechanic to destroy the asteroids</li>
+          </ul>
+        <h2>Kudos</h2>
+          <ul>
+            <li><a href="https://p5play.org/demos/">p5.play demos</a></li>
+            <li><a href="https://p5play.org/docs/classes/Sprite.html">p5.play docs</a></li>
+            <li><a href="https://creative-coding.decontextualize.com/making-games-with-p5-play/">p5.play tutorial</a></li>
+            <li>Image Attributions:</li>
+            <ul>
+              <li><a href="https://www.flaticon.com/free-icons/astronaut" title="astronaut icons">Astronaut icons created by Freepik - Flaticon</a></li>
+              <li><a href="https://www.flaticon.com/free-icons/asteroid" title="Asteroid icons">Asteroid icons created by mnauliady - Flaticon</a></li>
+            </ul>
+          </ul>
+      </div>
+    </div>
+  </body>
+</html>
