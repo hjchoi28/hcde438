@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../mp2/mp2.css" />
+  </head>
+  <body>
+    <h1 class="header">Hwa Jung Choi</h1>
+    <nav>
+      <a href="..">Home</a>
+      <a href="../bio/bio.html">About</a>
+      <a href="../cheatsheet/cheatsheet.html">"Cheatsheet"</a>
+    </nav>
+    <div class="page-container">
+      <div>
+        <h1>FP0 Proposal</h1>
+          <p>For my final project, I will update the game I made for <a href="https://hjchoi28.github.io/mp3/mp3-writeup">MP3</a> by adding a scoreboard with firebase.</p>
+        <h2>Prototype Version</h2>
+          <p>
+            The prototype will focus on making sure firebase is properly storing the user data.
+            Some parts like the number of seconds (score) will be hardcoded, but the aim is to accept user input
+            for the username. This prototype will also have minimal styling, with only necessary code, like buttons.
+            The scores will be shown in order of when the username was inputted.
+          </p>
+          <img
+              class="picture"
+              src="prototype-ver.png"
+              alt="prototype interface"
+            />
+        <h2>Final Version</h2>
+          <p>
+            For the final version, I will make the leaderboard show players in order of highest to lowest scores.
+            The scores of the current player will also be shown, along with their rank.
+            Then, I will also add more CSS styling to make it more visually appealing.
+          </p>
+          <img
+            class="picture"
+            src="final-ver.png"
+            alt="final version interface"
+            />
+        <h2>Development Process</h2>
+          <ol>
+            <li>Create a public repository for the prototype (consider using Hannah's template).</li>
+            <li>Follow <a href="https://github.com/branchwelder/web-technologies/blob/main/activities/09_firebase.md">Hannah's tutorial</a> on setting up firebase.</li>
+            <li>Create a simple html file to render the view of the projec.t</li>
+            <li>Collect and send user input to database, then render the usernames and monitor for changes.</li>
+            <li>Hardcode sample scores to test and complete the scoreboard prototype.</li>
+            <li>Add the mp3 game to the firebase project.</li>
+            <li>Make it so once the game ends, the user input prompt and scoreboard renders.</li>
+            <li><b>Milestone 1:</b> Complete and present the prototype in class (3/9)</li>
+            <li>Create a public repository for the final version by cloning the prototype</li>
+            <li>Confirm everything is properly installed</li>
+            <li>Instead of hardcoding fake scores, send the scores from the game file to database</li>
+            <li>Make the scoreboard code more robust by storing or rendering them in order of score (highest to lowest)</li>
+            <li>Add CSS styling to the user input prompt page</li>
+            <li>Add CSS styling to the scoreboard page</li>
+            <li><b>Milestone 2:</b> Complete and submit the final version</li>
+          </ol>
+        <h2>Known Unknowns</h2>
+          <ul>
+            <li>Storing or rendering data in a specific order in firebase</li>
+            <li>Moving the game to firebase</li>
+            <li>Finding the mouse position on mobile</li>
+          </ul>
+        <h2>Stretch Goals</h2>
+          <ul>
+            <li>Add music and/or sound effects</li>
+            <li>Add an extra game mechanic like food that gives the kitty a shield</li>
+            <li>Make the game compatible on mobile devices</li>
+            <li>Include multiplayer mode</li>
+          </ul>
+      </div>
+    </div>
+  </body>
+</html>
