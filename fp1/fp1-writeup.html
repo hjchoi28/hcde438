@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../mp2/mp2.css" />
+  </head>
+  <body>
+    <h1 class="header">Hwa Jung Choi</h1>
+    <nav>
+      <a href="..">Home</a>
+      <a href="../bio/bio.html">About</a>
+      <a href="../cheatsheet/cheatsheet.html">"Cheatsheet"</a>
+    </nav>
+    <div class="page-container">
+      <div>
+        <h1>FP1 Writeup</h1>
+        <h2>Overview & Usage</h2>
+          <p>For my final project prototype, I used firebase to add a scoreboard to the <a href="https://hjchoi28.github.io/mp3/mp3-writeup">MP3 game</a>.
+            <ul>
+              <li>Play my prototype at <a href="https://hjchoi28.github.io/fp1-prototype/">hjchoi28.github.io/fp1-prototype/</a></li>
+              <li>Check out the code in my <a href="https://github.com/hjchoi28/space-kitty">Public Github Repository</a>
+            </ul>
+          </p>
+        <h2>Development Process</h2>
+          <p>
+            I started this project by using Hannah's <a href="https://github.com/branchwelder/webdev-template">webdev-template</a>.
+            Next, I followed the firebase tutorial to setup the database. I focused on getting the name (user input) and score (hard coded) into the database
+            then rendering the results page.
+          </p>
+          <p>
+            Then, I made sure that I could start, build, and deploy the project. Unlike my MP3 project where I used web-dev-server, I didn't need a rollup.config.js file since vite could do both.
+            Once I fixed some syntax errors and confirmed everything worked, I mostly just worked on the project locally with <code>npm run start</code> until I completed the prototype.
+          </p>
+          <img
+            class="picture"
+            src="leaderboard.png"
+            alt="White background with the header 'Leaderboard', a button labelled 'Play Again', and game scores"
+            />
+          <p>
+            After I figured out the input view and the score view, I also implemented buttons. By this point, I had yet to add the game itself.
+            So, I had the "Play Again" button call on the function that renders the input view instead. This helped make sure that I was using the event listener
+            and further test the database with my nickname input and hardcoded scores. I also imported the <code>orderBy</code> function to order the scores from highest to lowest.
+          </p>
+          <p>
+            Finally, I added the game. It took a while to figure it out but I managed to fix the logical and syntax errors (more details below in Issue Deep-Dive).
+            I also figured out how to add the scores to the database, which was a step I planned to do in the final version, so I no longer need to hardcode the score for the demo in class.
+          </p>
+        <h2>Issue Deep-Dive</h2>
+          <img
+            class="picture"
+            src="error-404.png"
+            alt="Error 404 website not found message for github pages"
+          />
+          <p>
+            The first issue I encountered was a simple syntax error. When I tried to build and deploy the prototype,
+            there was an error message that my index.js file could not be bundled. This was easy to fix since all I needed to do was add <code>type="module"</code>
+            to the script src line in the index.html file. I also had an issue where the file could not be found, which I fixed by changing the base path in the package.json file:
+            <code>"deploy": "vite build --base=/fp1-prototype/ && gh-pages -d dist"</code>
+          </p>
+          <p>
+            The other issues were more logical. When I tried to add the actual game and have the user input prompt page show only after the user loses,
+            the game wouldn't render. I looked back at my code and the p5js functions like <code>draw</code> were greyed out.
+            Shi Ming helped by showing that I could use code like <code>window.draw</code> instead, which will make it appear.
+            I still had issues where if I pressed "Play Again", instead of resetting the game, it would take me back to the user input prompt.
+            I fixed the issue by making sure I was calling the correct functions and adding a global variable to keep track of when the player is alive or not.
+          </p>
+        <h2>Project Scope</h2>
+          <p>Now that I completed my prototype, I anticipate adding features from my stretch goals.
+            Since I was able to figure out how to send the scores from the game file to the database,
+            which I planned to be a bulk of my final iteration of the project,
+            I have time to focus on either making the game mobile-friendly or adding an extra game mechanic;
+            I will probably work on the former.
+            Considering how I am still unfamiliar with all the different tools that firebase offers,
+            I will not include a multiplayer mode. Instead, I want to focus on the scoreboard database.
+          </p>
+        <h2>Time Management</h2>
+          <p>Although I mostly followed the plan, some steps took longer than others,
+            specifically figuring out how to render the game in addition to the scoreboard.
+            I had some setbacks because p5.play code was not behaving like it did in my last project.
+            I spent a large bulk of the time testing different code and commenting out old lines,
+            which also set me back since I later got overwhelmed by the clutter and had to carefully delete them.
+            In the final version of the project, I will make sure to commit and push my work more often to avoid this problem.
+          </p>
+        <h2>Implementation Plan</h2>
+          <p>My implementation plan changed for the final version since I completed a large portion of what I thought would take a long time.
+            Instead, I plan to implement my stretch goal of making the game mobile-friendly and improving the CSS. I also already sorted the scores from highest to lowest.
+            The following is the new plan:
+            <ol>
+              <li>Create a public repository for the final version by cloning the prototype</li>
+              <li>Confirm everything is properly installed</li>
+              <li>Fix the mouse position in mobile (currently, player sprite teleports</li>
+              <li>Show only the top 5 scores</li>
+              <li>Still show the player's most recent score, even if they are not in the top 5</li>
+              <li>Add CSS styling to the user input prompt page to match the game's aesthetic</li>
+              <li>Add CSS styling to the scoreboard page to match the game's aesthetic</li>
+              <li>Start the final project write-up; document progress along the way</li>
+              <li><b>March 17th:</b> Submit the final version</li>
+            </ol>
+          </p>
+        <h2>Ideas and Future Work</h2>
+          <ul>
+            <li>Explore firebase more to make space kitty into a multiplayer game</li>
+            <li>Make it into a popup game with chrome browser extension</li>
+            <li>Add extra game mechanics like ability to shoot/destroy asteroids or shield against them</li>
+          </ul>
+        <h2>Kudos</h2>
+          <ul>
+            <li>Hannah's <a href="https://github.com/branchwelder/webdev-template">template</a></li>
+            <li>Hannah's <a href="https://github.com/branchwelder/web-technologies/blob/main/activities/09_firebase.md">firebase tutorial</a></li>
+            <li>Shi Ming who helped with controlling the end of the game (which used to automatically reset when the player loses)</li>
+            <li>Image Attributions:</li>
+            <ul>
+              <li><a href="https://www.flaticon.com/free-icons/astronaut" title="astronaut icons">Astronaut icons created by Freepik - Flaticon</a></li>
+              <li><a href="https://www.flaticon.com/free-icons/asteroid" title="Asteroid icons">Asteroid icons created by mnauliady - Flaticon</a></li>
+            </ul>
+          </ul>
+      </div>
+    </div>
+  </body>
+</html>
