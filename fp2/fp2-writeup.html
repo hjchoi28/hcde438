@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../mp2/mp2.css" />
+  </head>
+  <body>
+    <h1 class="header">Hwa Jung Choi</h1>
+    <nav>
+      <a href="..">Home</a>
+      <a href="../bio/bio.html">About</a>
+      <a href="../cheatsheet/cheatsheet.html">"Cheatsheet"</a>
+    </nav>
+    <div class="page-container">
+      <div>
+        <h1>FP2 Writeup</h1>
+        <h2>Overview & Usage</h2>
+          <p>For my final project prototype, I used firebase to add a scoreboard to the <a href="https://hjchoi28.github.io/mp3/mp3-writeup">MP3 game</a>.
+            <ul>
+              <li>Play my final game at <a href="https://hjchoi28.github.io/fp1-prototype/">hjchoi28.github.io/fp2-final/</a></li>
+              <li>Check out the code in my <a href="https://github.com/hjchoi28/fp2-final">Public Github Repository</a>
+            </ul>
+          </p>
+        <h2>Development Process</h2>
+          <p>
+            I continued working from where I stopped at the prototype by making the <a href="https://github.com/hjchoi28/fp1-prototype">prototype repository</a> into a template and using it for the final.
+            Then, I made sure that I could start, build, and deploy the project properly.
+            Once I fixed confirmed everything worked, I mostly just worked on the project locally with <code>npm run start</code> until I completed the prototype.
+          </p>
+          <img
+            class="picture"
+            src="leaderboard.png"
+            alt="White background with the header 'Leaderboard', a button labelled 'Play Again', and game scores"
+            />
+          <p>
+            After I figured out the input view and the score view, I also implemented buttons. By this point, I had yet to add the game itself.
+            So, I had the "Play Again" button call on the function that renders the input view instead. This helped make sure that I was using the event listener
+            and further test the database with my nickname input and hardcoded scores. I also imported the <code>orderBy</code> function to order the scores from highest to lowest.
+          </p>
+          <p>
+            Finally, I added the game. It took a while to figure it out but I managed to fix the logical and syntax errors (more details below in Issue Deep-Dive).
+            I also figured out how to add the scores to the database, which was a step I planned to do in the final version, so I no longer need to hardcode the score for the demo in class.
+          </p>
+        <h2>Issue Deep-Dive</h2>
+          <img
+            class="picture"
+            src="error-404.png"
+            alt="Error 404 website not found message for github pages"
+          />
+          <p>
+            The first issue I encountered was a simple syntax error. When I tried to build and deploy the prototype,
+            there was an error message that my index.js file could not be bundled. This was easy to fix since all I needed to do was add <code>type="module"</code>
+            to the script src line in the index.html file. I also had an issue where the file could not be found, which I fixed by changing the base path in the package.json file:
+            <code>"deploy": "vite build --base=/fp1-prototype/ && gh-pages -d dist"</code>
+          </p>
+          <p>
+            The other issues were more logical. When I tried to add the actual game and have the user input prompt page show only after the user loses,
+            the game wouldn't render. I looked back at my code and the p5js functions like <code>draw</code> were greyed out.
+            Shi Ming helped by showing that I could use code like <code>window.draw</code> instead, which will make it appear.
+            I still had issues where if I pressed "Play Again", instead of resetting the game, it would take me back to the user input prompt.
+            I fixed the issue by making sure I was calling the correct functions and adding a global variable to keep track of when the player is alive or not.
+          </p>
+        <h2>Ideas and Future Work</h2>
+          <ul>
+            <li>Explore firebase more to make space kitty into a multiplayer game</li>
+            <li>Make it into a popup game with chrome browser extension</li>
+            <li>Add extra game mechanics like ability to shoot/destroy asteroids or shield against them</li>
+          </ul>
+        <h2>Kudos</h2>
+          <ul>
+            <li>Hannah's <a href="https://github.com/branchwelder/webdev-template">template</a></li>
+            <li>Hannah's <a href="https://github.com/branchwelder/web-technologies/blob/main/activities/09_firebase.md">firebase tutorial</a></li>
+            <li>Shi Ming who helped with controlling the end of the game (which used to automatically reset when the player loses)</li>
+            <li>Image Attributions:</li>
+            <ul>
+              <li><a href="https://www.flaticon.com/free-icons/astronaut" title="astronaut icons">Astronaut icons created by Freepik - Flaticon</a></li>
+              <li><a href="https://www.flaticon.com/free-icons/asteroid" title="Asteroid icons">Asteroid icons created by mnauliady - Flaticon</a></li>
+            </ul>
+          </ul>
+      </div>
+    </div>
+  </body>
+</html>
