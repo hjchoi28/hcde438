@@ -14,53 +14,89 @@
       <div>
         <h1>FP2 Writeup</h1>
         <h2>Overview & Usage</h2>
-          <p>For my final project prototype, I used firebase to add a scoreboard to the <a href="https://hjchoi28.github.io/mp3/mp3-writeup">MP3 game</a>.
+          <p>For my final project prototype, I used firebase to add a leaderboard to the <a href="https://hjchoi28.github.io/mp3/mp3-writeup">MP3 game</a>.
             <ul>
               <li>Play my final game at <a href="https://hjchoi28.github.io/fp1-prototype/">hjchoi28.github.io/fp2-final/</a></li>
               <li>Check out the code in my <a href="https://github.com/hjchoi28/fp2-final">Public Github Repository</a>
             </ul>
           </p>
+          <img
+            class="picture"
+            src="fp2-leaderboard.png"
+            alt="Dark blue background with the header 'Leaderboard', a table of scores, and a button labelled 'Play Again'."
+            />
         <h2>Development Process</h2>
           <p>
             I continued working from where I stopped at the prototype by making the <a href="https://github.com/hjchoi28/fp1-prototype">prototype repository</a> into a template and using it for the final.
             Then, I made sure that I could start, build, and deploy the project properly.
             Once I fixed confirmed everything worked, I mostly just worked on the project locally with <code>npm run start</code> until I completed the prototype.
           </p>
-          <img
-            class="picture"
-            src="leaderboard.png"
-            alt="White background with the header 'Leaderboard', a button labelled 'Play Again', and game scores"
-            />
           <p>
-            After I figured out the input view and the score view, I also implemented buttons. By this point, I had yet to add the game itself.
-            So, I had the "Play Again" button call on the function that renders the input view instead. This helped make sure that I was using the event listener
-            and further test the database with my nickname input and hardcoded scores. I also imported the <code>orderBy</code> function to order the scores from highest to lowest.
+            After the initial setup, I worked on solving the issue with the kitty avatar teleporting when played on mobile.
+            The solution was fairly simple, where instead of having the icon load at the exact x,y position of the mouse, it instead follows the mouse.
+            This slightly changed the play style, but I think it made it more fun.
+            Additionally, I had time at the end of the project to change the cursor to an image of a fish, which makes it look like the cat is following the fish out of hunger.
+            Next, I worked on showing only the top 5 scores. To do so, I read the <a href="https://firebase.google.com/docs/firestore/query-data/order-limit-data">firebase documentation</a>.
+            In addition to <code>orderBy()</code>, which I already used in the prototype to have the scores in descending order (highest to lowest), I also implemented <code>limit()</code>.
+            While testing, I also found that players who had the same score would be ranked inaccurately. I wanted the player who obtained the score first to be ranked higher than the player with the duplicate score.
+            To do so, I ordered the scores by multiple fields: <code>query(scoreboard, orderBy("score", "desc"), orderBy("time"), limit(5))</code>.
+            Since I did not specify "desc" or "asc", the default is "asc", which shows the older score at the top.
           </p>
           <p>
-            Finally, I added the game. It took a while to figure it out but I managed to fix the logical and syntax errors (more details below in Issue Deep-Dive).
-            I also figured out how to add the scores to the database, which was a step I planned to do in the final version, so I no longer need to hardcode the score for the demo in class.
+            Then, I worked on making the nickname input content and leaderboard content show on different pages. For the prototype, users have to scroll down to the leaderboard, which stays even when they restart the game.
+            Despite running into some issues, which I will detail in the "Issue Deep-Dive" section below, I figured out how to implement the core user flow of this final iteration:
+            <ol>
+              <li>Load the game full screen</li>
+              <li>Once the player loses, display their score and ask for name input (default is "PLAYER" if they don't want to share their name)</li>
+              <li>When the user presses "Submit", display the leaderboard table</li>
+              <li>When the user presses "Play Again", restart the game full screen</li>
+            </ol>
+            Finally, I worked on improving the CSS and having the leaderboard match the style of the game.
           </p>
         <h2>Issue Deep-Dive</h2>
+          <p>
+            The first issue I encountered was with altering the html file to display the screens I wanted. I initially used <code>document.body.innerHTML = ""</code>,
+            which I got from the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML">mdn web docs</a>. I originally planned on having the body of the html document cleared when the kitty collides with an asteroid (game's end condition).
+            Afterwards, it would render the nickname input view and the scoreboard view. However, it prompted the following error:
+            <code>lit-html.ts:1349 Uncaught Error: This `ChildPart` has no `parentNode` and therefore cannot accept a value. This likely means the element containing the part was manipulated in an unsupported way outside of Lit's control such that the part's marker nodes were ejected from DOM. For example, setting the element's `innerHTML` or `textContent` can do this.</code>
+            To fix the error, I tried to trace where the error was thrown by using <code>console.log()</code>. Once I realized the issue was when I first cleared the body of the html document,
+            I decided not to directly alter the inner html. Instead, I decided to take a different approach by changing the CSS.
+            I created a scoreboard container with the style set to <code>display: none;</code>, which makes it so the container is not visible in the frontend.
+            Then, once the game ended, I sent the style of the container to <code>display: flex;</code> which overlaid the game with the name input container, and later the scoreboard container.
+          </p>
+          <p>
+            The second issue I had was with the <code>&lt;br&gt;</code> and <code>display:flex</code>. When I changed the display to a flex container, the <code>&lt;br&gt;</code> did not behave normally.
+            The solution was simple: adding <code>flex-direction: column</code>.
+          </p>
           <img
             class="picture"
-            src="error-404.png"
-            alt="Error 404 website not found message for github pages"
-          />
+            src="br-error.png"
+            alt="Dark blue background with the header, message, and user input box all on the same line"
+            />
           <p>
-            The first issue I encountered was a simple syntax error. When I tried to build and deploy the prototype,
-            there was an error message that my index.js file could not be bundled. This was easy to fix since all I needed to do was add <code>type="module"</code>
-            to the script src line in the index.html file. I also had an issue where the file could not be found, which I fixed by changing the base path in the package.json file:
-            <code>"deploy": "vite build --base=/fp1-prototype/ && gh-pages -d dist"</code>
+            Lastly, I struggled with getting setting up the scoreboard table and having the nickname and score show on each row. When I first attempted to create the table, I accidentally had the table heading show for each player's score, not just at the top.
+            To fix it, I nested the function in the table so it would only insert the name and score from the firebase database in each table row.
+            I also added an extra column to show the rank (1-5). I set a variable <code>rank = 0</code> then made sure that the rank will increase by one (<code>rank += 1</code>) with each descending row.
           </p>
-          <p>
-            The other issues were more logical. When I tried to add the actual game and have the user input prompt page show only after the user loses,
-            the game wouldn't render. I looked back at my code and the p5js functions like <code>draw</code> were greyed out.
-            Shi Ming helped by showing that I could use code like <code>window.draw</code> instead, which will make it appear.
-            I still had issues where if I pressed "Play Again", instead of resetting the game, it would take me back to the user input prompt.
-            I fixed the issue by making sure I was calling the correct functions and adding a global variable to keep track of when the player is alive or not.
-          </p>
+          <img
+            class="picture"
+            src="leaderboard-prototype.png"
+            alt="Dark blue background with the header 'Leaderboard', a list of scores formatted like 'name: score', and a button labelled 'Play Again'."
+            />
+          <img
+            class="picture"
+            src="table-error.png"
+            alt="Dark blue background with the header 'Leaderboard', a erroneous table of scores, and a button labelled 'Play Again'."
+            />
+          <img
+            class="picture"
+            src="table-ranking.png"
+            alt="Dark blue background with the header 'Leaderboard', a borderless table of scores, and a button labelled 'Play Again'."
+            />
         <h2>Ideas and Future Work</h2>
           <ul>
+            <li>Add a start and tutorial page</li>
+            <li>Let the player choose and unlock different kitty avatars</li>
             <li>Explore firebase more to make space kitty into a multiplayer game</li>
             <li>Make it into a popup game with chrome browser extension</li>
             <li>Add extra game mechanics like ability to shoot/destroy asteroids or shield against them</li>
@@ -70,10 +106,13 @@
             <li>Hannah's <a href="https://github.com/branchwelder/webdev-template">template</a></li>
             <li>Hannah's <a href="https://github.com/branchwelder/web-technologies/blob/main/activities/09_firebase.md">firebase tutorial</a></li>
             <li>Shi Ming who helped with controlling the end of the game (which used to automatically reset when the player loses)</li>
+            <li>Arissa who showed me I could add a div-container directly to the html file to show the game, nickname, and leaderboard display</li>
+            <li><a href="https://www.w3schools.com/howto/howto_css_overlay.asp"></a>W3School CSS Overlay Tutorial</li>
             <li>Image Attributions:</li>
             <ul>
               <li><a href="https://www.flaticon.com/free-icons/astronaut" title="astronaut icons">Astronaut icons created by Freepik - Flaticon</a></li>
               <li><a href="https://www.flaticon.com/free-icons/asteroid" title="Asteroid icons">Asteroid icons created by mnauliady - Flaticon</a></li>
+              <li><a href="https://www.flaticon.com/free-icons/dead-fish" title="dead fish icons">Dead fish icons created by Vitaly Gorbachev - Flaticon</a></li>
             </ul>
           </ul>
       </div>
