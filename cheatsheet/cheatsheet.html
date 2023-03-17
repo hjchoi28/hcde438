@@ -17,11 +17,10 @@
         <ul>
           <li><b>Encoded Characters</b></li>
           <ul>
-            <li>a tab is &lt;& ensp;&gt; without the space</li>
+            <li>a tab is <code>& ensp;</code> without the space</li>
             <li>a line break is &lt;br&gt;</li>
-            <li>"&lt;" is &lt;& lt;&gt; without the space</li>
-            <li>"&lt;" is &lt;& ensp;&gt; without the space</li>
-            <li>"&gt;" is &lt;& gt;&gt; without the space</li>
+            <li>"&lt;" is <code>& lt;</code> without the space</li>
+            <li>"&gt;" is <code>& gt;</code> without the space</li>
           </ul>
           <li><b>DOCTYPE!</b></li>
             <p>Always declare "&lt;!DOCTYPE html>" at the top of a html file.<br>
@@ -65,6 +64,7 @@
             <ul>
               <li><a href="https://css-tricks.com/almanac/properties/j/justify-content/">Justify Content</a> for horizontal layout</li>
               <li>Align items or content for vertical layout</li>
+              <li>When using flex display and &lt;br&gt;, add <code>flex-direction: column;</code> to have the &lt;br&gt; act normally</li>
             </ul>
         </ul>
 
